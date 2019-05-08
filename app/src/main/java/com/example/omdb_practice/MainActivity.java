@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.omdb_practice.api.ApiInterface;
+import com.example.omdb_practice.models.MovieItem;
 import com.example.omdb_practice.models.Movies;
 import com.example.omdb_practice.models.Rating;
 
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 content += "Website: " + movies1.getWeb() + "\n";
                 content += "Response: " + movies1.getResponse() + "\n\n";
 
-                tvResult.append(content);
+//                tvResult.append(content);
 
             }
 

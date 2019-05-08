@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.omdb_practice.models.MovieItem;
+
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
