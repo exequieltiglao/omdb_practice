@@ -9,8 +9,7 @@ public interface ApiInterface {
 
     @GET("/")
     Call<Movies> getMovies (
-            @Query("i") String imdbID,
+            @Query("t") String title,
             @Query("apikey") String apikey);
-
 
 }

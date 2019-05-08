@@ -52,12 +52,11 @@ public class Movies {
     @SerializedName("Response")
     private String response;
 
-    /* not working
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {
         return ratings;
-    } */
+    }
 
     public String getTitle() {
         return title;

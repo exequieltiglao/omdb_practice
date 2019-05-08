@@ -1,6 +1,8 @@
 package com.example.omdb_practice;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,9 +17,14 @@ import com.example.omdb_practice.api.ApiInterface;
 import com.example.omdb_practice.models.Movies;
 import com.example.omdb_practice.models.Rating;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private static final String TAG = "MainActivity";
     public static final String BASE_URL = "http://www.omdbapi.com/";
@@ -31,7 +38,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvResult = findViewById(R.id.results);
+        ArrayList<MovieItem> movieItems = new ArrayList<>();
+        movieItems.add(new MovieItem(R.drawable.ic_android, "Text 1", "Text 1"));
+        movieItems.add(new MovieItem(R.drawable.ic_android, "Text 2", "Text 2"));
+        movieItems.add(new MovieItem(R.drawable.ic_android, "Text 3", "Text 3"));
+
+        recyclerView = findViewById(R.id.recyclerview);
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new MovieAdapter(movieItems);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setHasFixedSize(true);
+
+//        tvResult = findViewById(R.id.results);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getMovies() {
 
-        Call<Movies> call = apiInterface.getMovies("tt4154796", "8eeefbee");
+        Call<Movies> call = apiInterface.getMovies("infinity war", "8eeefbee");
 
         call.enqueue(new Callback<Movies>() {
             @Override
@@ -82,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 content += "BoxOffice: " + movies1.getBoxoffice() + "\n";
                 content += "Production: " + movies1.getProd() + "\n";
                 content += "Website: " + movies1.getWeb() + "\n";
-                content += "Response: " + movies1.getResponse() + "\n";
+                content += "Response: " + movies1.getResponse() + "\n\n";
 
                 tvResult.append(content);
 
